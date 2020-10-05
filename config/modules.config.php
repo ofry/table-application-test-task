@@ -12,6 +12,8 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Laminas\Cache',
+    'Laminas\Paginator',
     'Laminas\Di',
     'Laminas\Log',
     'Laminas\Mvc\Plugin\FilePrg',
@@ -29,5 +31,7 @@ return [
     'Laminas\Validator',
     'Laminas\DeveloperTools',
     'Laminas\Diactoros',
+    'DoctrineModule',
+    'DoctrineORMModule',
     'Application',
 ];
