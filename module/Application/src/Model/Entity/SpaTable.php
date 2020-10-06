@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Application\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -100,7 +100,7 @@ class SpaTable
      */
     public function setName(string $name): SpaTable
     {
-        $this->name = $name;
+        $this->name = !empty(trim($name)) ? $name : '';
         return $this;
     }
 
@@ -118,7 +118,7 @@ class SpaTable
      */
     public function setQuantity(int $quantity): SpaTable
     {
-        $this->quantity = $quantity;
+        $this->quantity = !empty($quantity) ? $quantity : 0;
         return $this;
     }
 
@@ -136,7 +136,7 @@ class SpaTable
      */
     public function setDistance(int $distance): SpaTable
     {
-        $this->distance = $distance;
+        $this->distance = !empty($distance) && ($distance > 0) ? $distance : 0;
         return $this;
     }
 }
