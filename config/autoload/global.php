@@ -21,7 +21,7 @@ return [
                 'class' => \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
                 'cache' => 'array',
                 'paths' => [
-                    __DIR__ . '../../module/Application/src/Model/Entity',
+                    __DIR__ . '/../../module/Application/src/Model/Entity',
 //                    'another/path',
                 ],
             ],
