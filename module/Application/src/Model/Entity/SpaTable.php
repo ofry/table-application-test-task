@@ -69,18 +69,18 @@ class SpaTable
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getDate(): DateTime
+    public function getDate(): \DateTime
     {
         return $this->date;
     }
 
     /**
-     * @param DateTime $date
+     * @param \DateTime $date
      * @return SpaTable
      */
-    public function setDate(DateTime $date): SpaTable
+    public function setDate(\DateTime $date): SpaTable
     {
         $this->date = $date;
         return $this;
