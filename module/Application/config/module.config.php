@@ -37,11 +37,22 @@ return [
                     ],
                 ],
             ],
+            'ajax' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/ajax[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\AjaxController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+            Controller\AjaxController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
@@ -58,6 +69,9 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+        'strategies' => [
+            'ViewJsonStrategy',
         ],
     ],
 ];
