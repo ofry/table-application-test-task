@@ -10,12 +10,34 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
+use Application\Model\SpaTableModel;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use Laminas\Hydrator\ClassMethodsHydrator;
 
 class AjaxController extends AbstractActionController
 {
+    /**
+     * @var \Application\Model\TestTable
+     */
+    private $table;
+    /**
+     * @var \Laminas\Hydrator\ClassMethodsHydrator
+     */
+    private $hydrator;
+
+    /**
+     * RestfulController constructor.
+     *
+     * @param \Application\Model\SpaTableModel $table
+     */
+    public function __construct(SpaTableModel $table)
+    {
+        $this->table = $table;
+        $this->hydrator = new ClassMethodsHydrator();
+    }
+
     public function indexAction()
     {
         return new JsonModel();
