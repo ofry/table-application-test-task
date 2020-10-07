@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Application;
 
 use Application\Factory\AjaxControllerFactory;
+use Application\Model\SpaTableModel;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -73,6 +74,14 @@ return [
         ],
         'strategies' => [
             'ViewJsonStrategy',
+        ],
+    ],
+    'service_manager' => [
+        'factories'          => [
+            SpaTableModel::class => Factory\DbFactory::class,
+        ],
+        'aliases'            => [
+            Factory\DbFactory::class => SpaTableModel::class,
         ],
     ],
 ];
