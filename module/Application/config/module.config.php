@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Factory\AjaxControllerFactory;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -52,7 +53,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
-            Controller\AjaxController::class => InvokableFactory::class,
+            Controller\AjaxController::class => AjaxControllerFactory::class,
         ],
     ],
     'view_manager' => [

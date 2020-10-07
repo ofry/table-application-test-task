@@ -31,7 +31,7 @@ class SpaTableModel
      */
     public function newInit() : void
     {
-        $this->clear();
+        $this->truncate();
         $this->fill();
     }
 
@@ -40,7 +40,7 @@ class SpaTableModel
      *
      * @return void
      */
-    private function clear() : void
+    private function truncate() : void
     {
         $entries = $this->getAllEntries();
         foreach ($entries as $entry) {

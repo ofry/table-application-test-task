@@ -45,11 +45,24 @@ class AjaxController extends AbstractActionController
 
     public function generateAction()
     {
-        return new JsonModel();
+        $this->table->newInit();
+        /** @var array $entries */
+        $entries = $this->table->getAllEntries();
+        $result = array();
+        foreach ($entries as $entry) {
+            $result[] = $this->hydrator->extract($entry);
+        }
+        return new JsonModel(array('response' => $result));
     }
 
     public function loadAction()
     {
-        return new JsonModel();
+        /** @var array $entries */
+        $entries = $this->table->getAllEntries();
+        $result = array();
+        foreach ($entries as $entry) {
+            $result[] = $this->hydrator->extract($entry);
+        }
+        return new JsonModel(array('response' => $result));
     }
 }
