@@ -28,7 +28,7 @@ class AjaxController extends AbstractActionController
     private $hydrator;
 
     /**
-     * RestfulController constructor.
+     * AjaxController constructor.
      *
      * @param \Application\Model\SpaTableModel $table
      */
