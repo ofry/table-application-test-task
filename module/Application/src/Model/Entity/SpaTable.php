@@ -71,9 +71,9 @@ class SpaTable
     /**
      * @return \DateTime
      */
-    public function getDate(): \DateTime
+    public function getDate(): string
     {
-        return $this->date;
+        return $this->date->format('j-n-Y');
     }
 
     /**
