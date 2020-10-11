@@ -106,7 +106,7 @@ class SpaTableModel
         $queryBuilder->select('t')
             ->from(SpaTable::class, 't')
             ->setFirstResult($offset)
-            ->setMaxResults($limit);;
+            ->setMaxResults($limit);
 
         $query = $queryBuilder->getQuery();
 
