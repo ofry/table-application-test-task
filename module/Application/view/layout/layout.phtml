@@ -34,38 +34,72 @@
         <script language = "javascript">
             (function($) {
                 $(document).ready(function(){
-                    $.ajax({
-                        url:        '/ajax/load',
-                        type:       'POST',
-                        data: {
-                            page: 1
-                        },
-                        dataType:   'json',
-                        async:      true,
+                    var currentPage = 1;
+                    $('li#previous').addClass('disabled').removeClass('enabled');
+                    function loadPage(page) {
+                        $.ajax({
+                            url: '/ajax/load',
+                            type: 'POST',
+                            data: {
+                                page: page
+                            },
+                            dataType: 'json',
+                            async: true,
 
-                        success: function(data, status) {
-                            var tableBody = $('#main tbody');
+                            success: function (data, status) {
+                                var tableBody = $('#main tbody');
+                                tableBody.html('');
 
-                            for (count = 0; count <= data.response.length; count++)
-                            {
-                                var entry = data.response[count];
-                                var emptyRow = $('<tr>' +
+                                if (data.response.length < 10) {
+                                    $('li#next').addClass('disabled').removeClass('enabled');
+                                }
+                                else {
+                                    $('li#next').removeClass('disabled').addClass('enabled');
+                                }
+
+                                for (count = 0; count <= data.response.length; count++) {
+                                    var entry = data.response[count];
+                                    var emptyRow = $('<tr>' +
                                         '<td class="date"></td>' +
                                         '<td class="name"></td>' +
                                         '<td class="quantity"></td>' +
                                         '<td class="distance"></td>' +
-                                    '</tr>');
-                                $(".date", emptyRow).html(entry.date);
-                                $(".name", emptyRow).html(entry.name);
-                                $(".quantity", emptyRow).html(entry.quantity);
-                                $(".distance", emptyRow).html(entry.distance);
+                                        '</tr>');
+                                    $(".date", emptyRow).html(entry.date);
+                                    $(".name", emptyRow).html(entry.name);
+                                    $(".quantity", emptyRow).html(entry.quantity);
+                                    $(".distance", emptyRow).html(entry.distance);
 
-                                tableBody.append(emptyRow);
+                                    tableBody.append(emptyRow);
+                                }
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                alert('Ajax request failed.');
                             }
-                        },
-                        error : function(xhr, textStatus, errorThrown) {
-                            alert('Ajax request failed.');
+                        });
+                    }
+
+                    loadPage(currentPage);
+
+                    $('li.enabled#previous').click(function(event) {
+                        currentPage--;
+                        if (currentPage === 1) {
+                            $('li#previous').addClass('disabled').removeClass('enabled');
                         }
+                        else {
+                            $('li#previous').removeClass('disabled').addClass('enabled');
+                        }
+                        loadPage(currentPage);
+                    });
+                    $('li.enabled#next').click(function(event) {
+                        currentPage++;
+                        if (currentPage === 1) {
+                            $('li#previous').addClass('disabled').removeClass('enabled');
+                        }
+                        else {
+                            $('li#previous').removeClass('disabled').addClass('enabled');
+                        }
+                        loadPage(currentPage);
                     });
                 });
             })(jQuery);
