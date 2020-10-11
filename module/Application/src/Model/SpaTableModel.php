@@ -2,6 +2,7 @@
 
 namespace Application\Model;
 
+use Application\Model\Entity\SpaTable;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -79,13 +80,36 @@ class SpaTableModel
     }
 
     /**
-     * @return array
+     * @return int|mixed|string
      */
     public function getAllEntries()
     {
-        /** @var string[] $values Параметр для отбора */
-        $entries = $this->db->getRepository(Entity\SpaTable::class)
-            ->findAll();
-        return $entries;
+        $queryBuilder = $this->db->createQueryBuilder();
+
+        $queryBuilder->select('t')
+            ->from(SpaTable::class, 't');
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param int $limit количество элементов на странице
+     * @param int $offset устанавливается для соответствующей страницы
+     * @return int|mixed|string
+     */
+    public function getFilteredEntries(int $limit = 10, int $offset = 0)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+
+        $queryBuilder->select('t')
+            ->from(SpaTable::class, 't')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);;
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
     }
 }

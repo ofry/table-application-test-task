@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e26ce4b67c118dfe8d4b665a5ca3b27",
+    "content-hash": "1f397ff824a45753bee7f09433b434e8",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -1817,6 +1817,58 @@
                 "laminas"
             ],
             "time": "2019-12-31T16:31:45+00:00"
+        },
+        {
+            "name": "laminas/laminas-dependency-plugin",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-dependency-plugin.git",
+                "reference": "38bf91861f5b4d49f9a1c530327c997f7a7fb2db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-dependency-plugin/zipball/38bf91861f5b4d49f9a1c530327c997f7a7fb2db",
+                "reference": "38bf91861f5b4d49f9a1c530327c997f7a7fb2db",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.9",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "phpcompatibility/php-compatibility": "^9.3",
+                "phpunit/phpunit": "^8.4",
+                "roave/security-advisories": "dev-master",
+                "webimpress/coding-standard": "^1.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev",
+                    "dev-develop": "1.1.x-dev"
+                },
+                "class": "Laminas\\DependencyPlugin\\DependencyRewriterPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\DependencyPlugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Replace zendframework and zfcampus packages with their Laminas Project equivalents.",
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2020-05-20T13:45:39+00:00"
         },
         {
             "name": "laminas/laminas-development-mode",
@@ -5140,6 +5192,55 @@
                 }
             ],
             "time": "2020-09-15T12:23:47+00:00"
+        },
+        {
+            "name": "tasmaniski/laminas-params-helper",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tasmaniski/laminas-params-helper.git",
+                "reference": "33d417cf59b6310b276f2b5ae24fee40f429e267"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tasmaniski/laminas-params-helper/zipball/33d417cf59b6310b276f2b5ae24fee40f429e267",
+                "reference": "33d417cf59b6310b276f2b5ae24fee40f429e267",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-dependency-plugin": "^1.0",
+                "laminas/laminas-mvc": "^3.0",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ParamsHelper": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandar Varnicic",
+                    "email": "tasmaniski@gmail.com"
+                }
+            ],
+            "description": "View Helper for reading data from $_GET, $_POST and Routes in view",
+            "homepage": "https://github.com/tasmaniski",
+            "keywords": [
+                "Zend Framework",
+                "helper",
+                "laminas framework",
+                "params",
+                "view"
+            ],
+            "time": "2020-04-09T15:47:44+00:00"
         },
         {
             "name": "webimpress/safe-writer",

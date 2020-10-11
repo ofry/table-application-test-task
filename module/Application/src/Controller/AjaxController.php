@@ -16,6 +16,10 @@ use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 use Laminas\Hydrator\ClassMethodsHydrator;
 
+// Add aliases for paginator classes
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+
 class AjaxController extends AbstractActionController
 {
     /**
@@ -26,6 +30,8 @@ class AjaxController extends AbstractActionController
      * @var \Laminas\Hydrator\ClassMethodsHydrator
      */
     private $hydrator;
+
+    public const ITEMSPERPAGE = 10;
 
     /**
      * AjaxController constructor.
@@ -57,8 +63,13 @@ class AjaxController extends AbstractActionController
 
     public function loadAction()
     {
+        $page = $this->params()->fromPost('page', 1);
+
+        $offset = self::ITEMSPERPAGE * ($page - 1);
+
         /** @var array $entries */
-        $entries = $this->table->getAllEntries();
+        $entries = $this->table->getFilteredEntries(self::ITEMSPERPAGE, $offset);
+
         $result = array();
         foreach ($entries as $entry) {
             $result[] = $this->hydrator->extract($entry);

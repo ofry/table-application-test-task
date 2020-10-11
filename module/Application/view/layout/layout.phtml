@@ -37,6 +37,9 @@
                     $.ajax({
                         url:        '/ajax/load',
                         type:       'POST',
+                        data: {
+                            page: 1
+                        },
                         dataType:   'json',
                         async:      true,
 

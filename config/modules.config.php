@@ -33,5 +33,6 @@ return [
     'Laminas\Diactoros',
     'DoctrineModule',
     'DoctrineORMModule',
+    'ParamsHelper',
     'Application',
 ];
