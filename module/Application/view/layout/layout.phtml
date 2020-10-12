@@ -33,10 +33,23 @@
 
         <script language = "javascript">
             (function($) {
+                var currentPage = 1;
+                var previousDisabled = false;
+                var nextDisabled = false;
                 $(document).ready(function(){
-                    var currentPage = 1;
-                    $('li#previous').addClass('disabled').removeClass('enabled');
                     function loadPage(page) {
+                        if (page === 1) {
+                            if (!previousDisabled) {
+                                togglePrevious();
+                                previousDisabled = true;
+                            }
+                        }
+                        else {
+                            if (previousDisabled) {
+                                togglePrevious();
+                                previousDisabled = false;
+                            }
+                        }
                         $.ajax({
                             url: '/ajax/load',
                             type: 'POST',
@@ -51,10 +64,16 @@
                                 tableBody.html('');
 
                                 if (data.response.length < 10) {
-                                    $('li#next').addClass('disabled').removeClass('enabled');
+                                    if (!nextDisabled) {
+                                        toggleNext();
+                                        nextDisabled = true;
+                                    }
                                 }
                                 else {
-                                    $('li#next').removeClass('disabled').addClass('enabled');
+                                    if (nextDisabled) {
+                                        toggleNext();
+                                        nextDisabled = false;
+                                    }
                                 }
 
                                 for (count = 0; count <= data.response.length; count++) {
@@ -72,6 +91,7 @@
 
                                     tableBody.append(emptyRow);
                                 }
+                                return false;
                             },
                             error: function (xhr, textStatus, errorThrown) {
                                 alert('Ajax request failed.');
@@ -81,26 +101,28 @@
 
                     loadPage(currentPage);
 
-                    $('li.enabled#previous').click(function(event) {
+                    $('li#previous:not(disabled)').on('click', 'a', function(event) {
                         currentPage--;
-                        if (currentPage === 1) {
-                            $('li#previous').addClass('disabled').removeClass('enabled');
-                        }
-                        else {
-                            $('li#previous').removeClass('disabled').addClass('enabled');
-                        }
                         loadPage(currentPage);
+                        return false;
                     });
-                    $('li.enabled#next').click(function(event) {
+                    $('li#next:not(disabled)').on('click', 'a', function(event) {
                         currentPage++;
-                        if (currentPage === 1) {
-                            $('li#previous').addClass('disabled').removeClass('enabled');
-                        }
-                        else {
-                            $('li#previous').removeClass('disabled').addClass('enabled');
-                        }
                         loadPage(currentPage);
+                        return false;
                     });
+
+                    function togglePrevious()
+                    {
+                        $('li#previous').toggleClass('disabled enabled');
+                        return false;
+                    }
+
+                    function toggleNext()
+                    {
+                        $('li#next').toggleClass('disabled enabled');
+                        return false;
+                    }
                 });
             })(jQuery);
         </script>
