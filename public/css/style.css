@@ -10,3 +10,28 @@
     background-color: var(--brand-color);
     border-color: var(--brand-color);
 }
+
+.sorted {
+    position: relative;
+    overflow: hidden;
+}
+.sorted:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: url("../img/arrow.png") right center no-repeat;
+    background-size: contain;
+}
+
+.sorted-asc:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    transform: rotate(180deg);
+}
+
+.sorted-desc:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+}
