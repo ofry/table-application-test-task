@@ -36,6 +36,16 @@
                 var currentPage = 1;
                 var previousDisabled = false;
                 var nextDisabled = false;
+
+                const NAME = 2;
+                const QUANTITY = 3;
+                const DISTANCE = 4;
+
+                var sorted = false;
+                var sortedParam = 0;
+                var sortedAsc = false;
+                var sortedDesc = false;
+
                 $(document).ready(function(){
                     function loadPage(page) {
                         if (page === 1) {
@@ -111,6 +121,55 @@
                         loadPage(currentPage);
                         return false;
                     });
+
+                    $('thead').on('click', 'th.name', function(event) {
+                        toggleSort(NAME);
+                        toggleSortClasses(this);
+                        currentPage = 1;
+                        return false;
+                    }).on('click', 'th.quantity', function(event) {
+                        toggleSort(QUANTITY);
+                        toggleSortClasses(this);
+                        currentPage = 1;
+                        return false;
+                    }).on('click', 'th.distance', function(event) {
+                        toggleSort(DISTANCE);
+                        toggleSortClasses(this);
+                        currentPage = 1;
+                        return false;
+                    });
+
+                    function toggleSortClasses(element)
+                    {
+                        $('thead th').removeClass('sorted-asc sorted-desc');
+                        if (sortedAsc) {
+                            $(element).addClass('sorted-asc');
+                        }
+                        else if (sortedDesc) {
+                            $(element).addClass('sorted-desc');
+                        }
+                    }
+
+                    function toggleSort(paramName)
+                    {
+                        if (sorted && sortedParam === paramName)
+                        {
+                            if (sortedAsc) {
+                                sortedAsc = false;
+                                sortedDesc = true;
+                            }
+                            else if (sortedDesc) {
+                                sortedAsc = true;
+                                sortedDesc = false;
+                            }
+                        }
+                        else {
+                            sorted = true;
+                            sortedParam = paramName;
+                            sortedAsc = true;
+                            sortedDesc = false;
+                        }
+                    }
 
                     function togglePrevious()
                     {
